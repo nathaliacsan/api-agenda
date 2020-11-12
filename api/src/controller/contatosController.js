@@ -9,7 +9,7 @@ const getAll = (request, response) => {
         if(error) {
             return response.status(500).send(error)
         } else {
-            return response.status(200).json({
+            return response.status(200).send({
                 mensagem: "Tudo certo",
                 contact
             })
@@ -19,7 +19,7 @@ const getAll = (request, response) => {
 
 const getByName = (request, response) => {
 
-    const nameParam = request.params
+    const nameParam = request.query
 
     contatoCollection.find(nameParam, (error, contact) => {
 
@@ -27,11 +27,11 @@ const getByName = (request, response) => {
             return response.status(500).send(error)
         } else {
             if(contact == "") {
-                return response.status(200).json({
+                return response.status(200).send({
                     mensagem: "Contato não encontrado"
                 })
             } else {
-                return response.status(404).json({
+                return response.status(404).send({
                     mensagem: "GET por Id feito com sucesso",
                     contact
                 })
@@ -52,18 +52,18 @@ const getById = (request, response) => {
                 error
             })
         } else {
-                return response.status(200).json({
+                return response.status(200).send({
                     mensagem: "Contatinho encontrado",
                     contact})  
-        } 
+        }   
 
     })
 }
 
 
 const addContact = (request, response) => {
-    const contactFromBody = request.body // pegando o body que o usuário digitou
-    const contact = new contatoCollection(contactFromBody) // criando um novo dado
+    const contactFromBody = request.body 
+    const contact = new contatoCollection(contactFromBody) 
 
     contact.save((error) => {
         if(error) {
@@ -86,12 +86,12 @@ const deleteContact = (request, response) => {
             return response.status(500).send(error)
         } else {
             if(contact) {
-                return response.status(200).json({
+                return response.status(200).send({
                     mensagem: "Contatinho deletado!"
                 })
             } else {
-                return response.status(404).json({
-                    mensagem: "Não foi possível deletar pois esse contatinho não existe na sua agenda."
+                return response.status(404).send({
+                    mensagem: "Não foi possível deletar. Esse contatinho não existe na sua agenda."
                 })
             }
         }
@@ -107,10 +107,10 @@ const updateCellPhone = (request, response) => {
    
     
 
-        if(contactFromBody.nome != null || contactFromBody.dataNascimento != null) {
-            return response.status(400).json(
+        if(contactFromBody.nome != null || contactFromBody.dataNascimento != null || contactFromBody.fotoPerfil != null) {
+            return response.status(400).send(
                 {
-                mensagem: "Você só pode editar o campo celular"
+                mensagem: "Você só pode editar o campo celular."
             })
             
         } else {
@@ -119,13 +119,13 @@ const updateCellPhone = (request, response) => {
                 if(error) {
                     return response.status(500).send(error)
                 } else if (contact) {
-                    return response.status(200).json({
-                        mensagem: "Celular atualizado",
+                    return response.status(200).send({
+                        mensagem: "Celular atualizado.",
                         contact
                     })
                 } else {
-                    return response.status(404).json({
-                        mensagem: "Contato não encontrado"
+                    return response.status(404).send({
+                        mensagem: "Contato não encontrado."
                     })
                 }
             })
@@ -135,21 +135,26 @@ const updateCellPhone = (request, response) => {
 
 const updateContact = (request, response) => {
 
+
     const idParam = request.params.id
     const contactFromBody = request.body
     const update = {new: true}
 
-    contatoCollections.findByIdAndUpdate(idParam, contactFromBody, update, (error, contact) => {
+    contatoCollections.findByIdAndUpdate(
+        idParam, 
+        contactFromBody, 
+        update, (error, contact) => {
 
         if(error) {
-            return response.status(500).json({
+            return response.status(500).send({
                 mensagem: "Aconteceu um erro.",
                 error
             })
-        } else if (contact) {
-            return response.status(200).json({
+        } else {
+            return response.status(200).send({
                 mensagem: "Contatinho atualizado.",
-            contact})
+                contact
+            })
         } 
     })
 }

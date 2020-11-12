@@ -26,6 +26,9 @@ const contatoSchema = new Schema({
         type: String,
         required: false
     }
+},
+{
+    versionKey: false
 })
 
 const contatoCollections = mongoose.model('contato', contatoSchema)
