@@ -16,38 +16,14 @@ Utilizei como ferramentas: `Node.js`, `Express`, `Nodemon`, `Cors`, `Mongoose`.
 
 #### **Rotas a serem retornadas:**
 
-| Recurso | Descrição |
-| --- | --- |
-| `/` | Retorna index com apresentação.|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/` | Retorna todos os dados do banco de dados.|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/criar` | Cria novo contato e retorna mensagem.|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/nome/[NOME]` |  Retorna contato por nome específico. (Utiliza **Query Parameters**)|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/id/[ID]` |  Retorna contato por id específico. |
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/deletar/[ID]` |  Deleta contato por id específico e retorna mensagem.|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/atualizar/telefone/[ID]` |  Atualiza somente telefone do contato por id específico e retorna mensagem. Não permite que modifique nenhum outro item.|
-
-| Recurso | Descrição |
-| --- | --- |
-| `/contatos/atualizar/[ID]` |  Atualiza completamente contato e retorna mensagem.|
-
+ - `"/"` Retorna index com apresentação.
+ - `"/contatos/"` Retorna todos os dados do banco de dados.
+ - `"/contatos/criar"` Cria novo contato e retorna mensagem.
+ - `"/contatos/nome/[NOME]"` Retorna contato por nome específico. (Utiliza **Query Parameters**)
+ - `"/contatos/id/[ID]"` Retorna contato por id específico. 
+ - `"/contatos/deletar/[ID]"` Deleta contato por id específico e retorna mensagem. 
+ - `"/contatos/atualizar/telefone/[ID]"` Atualiza somente telefone do contato por id específico e retorna mensagem. Não permite que modifique nenhum outro item.
+ - `"/contatos/atualizar/[ID]"` Atualiza completamente contato e retorna mensagem.
 
 ### Arquitetura
 
